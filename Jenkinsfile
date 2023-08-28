@@ -20,22 +20,22 @@ pipeline {
         }
         stage("Build Docker Image"){
             steps{
-                sh "docker build -t {johnkalayu}/insure-me"
+                sh "docker build -t insure-me"
             }
         }
         stage("push image to dockerhub"){
             steps{
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PAPILLON@321', usernameVariable: 'johnkalayu')]) {
                     sh "docker login -u johnkalayu -p PAPILLON@321"
-                    sh "docker push johnkalayu/insure-me:"
+                    sh "docker push insure-me"
 }
             }
         }
         stage("Docker container deployment"){
             steps{
                 sh "docker rm insure-me -f"
-                sh "docker pull johnkalyu/insure-me:"
-                sh "docker run -d --rm -p 8080:8091 --name insure-me $johnkalayu/insure-jo:"
+                sh "docker pull insure-me:"
+                sh "docker run -d --rm -p 8080:8091 --name insure-me"
                 echo "Application started on port: {8080} (8081)"
             }
         }
