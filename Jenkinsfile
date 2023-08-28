@@ -20,7 +20,7 @@ pipeline {
         }
         stage("Build Docker Image"){
             steps{
-                sh "docker build -t johnkalyu/insure-me ."
+                sh "docker build -t johnkalayu/insure-me ."
             }
         }
         stage("push image to dockerhub"){
