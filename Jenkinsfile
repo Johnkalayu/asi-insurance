@@ -27,7 +27,7 @@ pipeline {
             steps{
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PAPILLON@321', usernameVariable: 'johnkalayu')]) {
                     sh "docker login -u $johnkalayu -p $PAPILLON@321"
-                    sh "docker push johnkalyu/insure-me"
+                    sh "docker push johnkalayu/insure-me:latest"
 }
             }
         }
