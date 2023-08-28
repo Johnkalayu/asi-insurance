@@ -3,14 +3,14 @@ pipeline {
     environment {
         PATH = "/usr/bin:$PATH"
         tag = "1.0"
-        dockerHubUser="akshay451995"
+        dockerHubUser="johnkalayu"
         containerName="insure-me"
         httpPort="8081"
     }
     stages {
         stage("code clone"){
             steps {
-                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/akshay451995/asi-insurance.git']])
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: '']])
             }
         }
         stage("Maven build"){
@@ -20,23 +20,23 @@ pipeline {
         }
         stage("Build Docker Image"){
             steps{
-                sh "docker build -t ${dockerHubUser}/insure-me:${tag} ."
+                sh "docker build -t {johnkalayu}/insure-me:${tag} ."
             }
         }
         stage("push image to dockerhub"){
             steps{
-                withCredentials([usernamePassword(credentialsId: 'dockerHubAccount', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUser')]) {
-                    sh "docker login -u $dockerUser -p $dockerPassword"
-                    sh "docker push $dockerUser/$containerName:$tag"
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PAPILLON@321', usernameVariable: 'johnkalayu')]) {
+                    sh "docker login -u johnkalayu -p PAPILLON@321"
+                    sh "docker push johnkalayu/insure-me:$tag"
 }
             }
         }
         stage("Docker container deployment"){
             steps{
-                sh "docker rm $containerName -f"
-                sh "docker pull $dockerHubUser/$containerName:$tag"
-                sh "docker run -d --rm -p $httpPort:$httpPort --name $containerName $dockerHubUser/$containerName:$tag"
-                echo "Application started on port: ${httpPort} (http)"
+                sh "docker rm insure-me -f"
+                sh "docker pull johnkalyu/insure-me:$tag"
+                sh "docker run -d --rm -p 8080:8091 --name insure-me $johnkalayu/insure-jo:$tag"
+                echo "Application started on port: {8081} (http)"
             }
         }
     }
