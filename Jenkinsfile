@@ -36,7 +36,7 @@ pipeline {
                 sh "docker rm insure-me -f"
                 sh "docker pull johnkalyu/insure-me:$tag"
                 sh "docker run -d --rm -p 8080:8091 --name insure-me $johnkalayu/insure-jo:$tag"
-                echo "Application started on port: {8081} (http)"
+                echo "Application started on port: {8080} (8081)"
             }
         }
     }
