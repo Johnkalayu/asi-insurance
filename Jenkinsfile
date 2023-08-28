@@ -20,14 +20,14 @@ pipeline {
         }
         stage("Build Docker Image"){
             steps{
-                sh "docker build -t insure-me ."
+                sh "docker build -t johnkalyu/insure-me ."
             }
         }
         stage("push image to dockerhub"){
             steps{
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PAPILLON@321', usernameVariable: 'johnkalayu')]) {
                     sh "docker login -u johnkalayu -p PAPILLON@321"
-                    sh "docker push insure-me"
+                    sh "docker push johnkalyu/insure-me"
 }
             }
         }
