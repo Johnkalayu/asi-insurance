@@ -1,4 +1,4 @@
-pipeline {
+:pipeline {
     agent any 
     environment {
         PATH = "/usr/bin:$PATH"
@@ -35,7 +35,7 @@ pipeline {
             steps{
                 sh "docker rm insure-me -f"
                 sh "docker pull johnkalayu/insure-me:latest"
-                sh "docker run -d insure-me --rm -p 8080:8081 --name johnkalayu/insure-me"
+                sh "docker run -d --name insure-me --rm -p 8080:8081 johnkalayu/insure-me:latest"
                 echo "Application started on port: {8080} (8081)"
             }
         }
