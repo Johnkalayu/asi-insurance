@@ -34,7 +34,7 @@ pipeline {
         stage("Docker container deployment"){
             steps{
                 sh "docker rm insure-me -f"
-                sh "docker pull insure-me"
+                sh "docker pull insure-me:latest"
                 sh "docker run -d --rm -p 8080:8091 --name insure-me"
                 echo "Application started on port: {8080} (8081)"
             }
