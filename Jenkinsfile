@@ -25,8 +25,8 @@ pipeline {
         }
         stage("push image to dockerhub"){
             steps{
-                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PAPILLON@321', usernameVariable: 'johnkalayu')]) {
-                    sh "docker login -u johnkalayu -p PAPILLON@321"
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: '$yourpasswd', usernameVariable: '$yourusername')]) {
+                    sh "docker login -u $yourdockerhubuser -p $yourpasswd"
                     sh "docker push johnkalayu/insure-me:latest"
 }
             }
