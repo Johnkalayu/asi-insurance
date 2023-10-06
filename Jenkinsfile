@@ -5,7 +5,7 @@ pipeline {
         tag = "1.0"
         dockerHubUser="johnkalayu"
         containerName="insure-me"
-        httpPort="8081"
+        httpPort="8091"
     }
     stages {
         stage("code clone"){
@@ -25,8 +25,8 @@ pipeline {
         }
         stage("push image to dockerhub"){
             steps{
-                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: '$yourpasswd', usernameVariable: '$yourusername')]) {
-                    sh "docker login -u $yourdockerhubuser -p $yourpasswd"
+                withCredentials([usernamePassword(credentialsId: 'Dockerhub', passwordVariable: 'johnkalayu', usernameVariable: 'PAPILLONJ')]) {
+                    sh "docker login -u johnkalayu -p PAPILLONJ"
                     sh "docker push johnkalayu/insure-me:latest"
 }
             }
@@ -35,8 +35,8 @@ pipeline {
             steps{
                 sh "docker rm insure-me -f"
                 sh "docker pull johnkalayu/insure-me:latest"
-                sh "docker run -d --name insure-me --rm -p 8081:8080 johnkalayu/insure-me:latest"
-                echo "Application started on port: {8081} (8080)"
+                sh "docker run -d --name insure-me --rm -p 8091:8080 johnkalayu/insure-me:latest"
+                echo "Application started on port: {8091} (8080)"
             }
         }
     }
